@@ -1,39 +1,39 @@
-# PeselReader-Python-sqlite 🚀
-
-A professional Python-based **ETL (Extract, Transform, Load) pipeline** designed for batch processing and validation of Polish PESEL numbers. This project demonstrates clean Object-Oriented Programming (OOP) principles and structured data storage.
-
-## 🌟 Key Features
-- **ETL Architecture:** Fully implemented data pipeline (Extract from ZIP, Transform via Validator, Load to SQLite).
-- **Batch Processing:** Automatically scans and processes all `.txt` files within ZIP archives.
-- **Robust Validation:** Implements official weighted checksum algorithms to ensure data integrity.
-- **Data Decoding:** Extracts birth date (handling 18th-22nd centuries) and gender.
-- **Persistent Storage:** Saves validated records into a local SQLite database with duplicate prevention.
-- **Clean Code:** Fully documented with English docstrings and type-consistent naming.
+#PyPeselReader-ETL 🚀
+A professional Python-based **ETL (Extract, Transform, Load) pipeline** designed for batch processing, validation, and enrichment of Polish PESEL numbers. This project demonstrates industrial Data Engineering practices, clean Object-Oriented Programming (OOP), and robust error handling.
 
 
 
-## 🛠 Technologies
+##🌟 Key Features
+- **ETL Architecture:** Fully automated data pipeline: **Extract** from ZIP, **Transform** via weighted validation, and **Load** to SQLite.
+- **Batch CSV Processing:** Automatically scans and processes multiple `.csv` files within ZIP archives using `csv.DictReader` for header-mapped data extraction.
+- **Data Quality Tracking:** Implements a dual-storage strategy:
+    - **Success Table:** Validated records with enriched date segments (Day, Month Name, Year).
+    - **Rejection Table:** Automatically captures "dirty" data with specific error reasons for audit purposes.
+- **System Observability:** Integrated professional logging system (`pesel.log`) that tracks every step of the pipeline and system-level events.
+- **Encoding Awareness:** Optimized for Polish environments with `windows-1250` support to handle special characters in names and data.
+- **Robust Validation:** Implements official weighted checksum algorithms and century-aware birth date decoding (1800-2299).
+
+
+
+##🛠 Technologies
 - **Python 3.x**
-- **SQLite3** (Database)
-- **Zipfile & IO** (Buffer-based file processing)
-- **Datetime** (Temporal data handling)
+- **SQLite3** (Relational storage)
+- **CSV & Logging** (Standard libraries for data & monitoring)
+- **Zipfile & IO** (Buffer-based archive processing)
+- **Datetime** (Temporal data enrichment)
 
 
 
-## ⚙️ Usage
-Prepare a .zip archive containing .txt files with one PESEL number per line.
+##⚙️ Usage
+1. Prepare a `.zip` archive containing `.csv` files. 
+2. Ensure each CSV file has a header named `pesel`.
+3. Run the script:
+   ```bash
+   python PeselReader.py
 
-Run the script:
-python PeselReader_v*.py
-The system will extract, validate, and store the results in PeselInfo.db.
 
 
-
-## 📈 Future Roadmap (Data Engineering Path)
-[ ] Add professional Logging to app.log.
-
-[ ] Implement a RejectedRecords table for Data Quality monitoring.
-
+##📈 Future Roadmap (Data Engineering Path)
 [ ] Containerize the application using Docker.
 
 [ ] Transition to PostgreSQL for scalable storage.
